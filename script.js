@@ -28,6 +28,8 @@ function createColorPalette() {
     const color = document.createElement('div');
     color.className = 'color';
     colorPalette.appendChild(color);
+
+    if (index === 0) color.classList.add('selected');
   }
   const button = document.createElement('button');
   button.innerText = 'Cores aleatórias';
