@@ -1,4 +1,5 @@
 const colorPalette = document.querySelector('#color-palette');
+const pixelBoard = document.getElementById('pixel-board');
 
 function setPrimaryColors() {
   const colors = colorPalette.children;
@@ -61,8 +62,20 @@ function generateRandomColors() {
   addColorsToLocalStorage();
 }
 
-randomButton.addEventListener('click', () => {
-  generateRandomColors();
-});
+function generatePixelBoard() {
+  for (let index = 0; index < 5; index += 1) {
+    for (let index2 = 0; index2 < 5; index2 += 1) {
+      const pixel = document.createElement('div');
+      pixel.className = 'pixel';
+      pixel.style.backgroundColor = 'white';
+      pixelBoard.appendChild(pixel);
+    }
+    const breakRow = document.createElement('br');
+    pixelBoard.appendChild(breakRow);
+  }
+}
+
+randomButton.addEventListener('click', generateRandomColors);
 
 initialRenderization();
+generatePixelBoard();

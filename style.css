@@ -23,6 +23,7 @@
   border: 1px solid black;
   cursor: pointer;
   vertical-align: middle;
+  border-radius: 100%;
 }
 
 #color-palette .color:nth-of-type( 1 ) {
@@ -37,5 +38,19 @@
   height: 50px;
   border: none;
   font-size: 14px;
+  cursor: pointer;
+}
+
+#pixel-board {
+  text-align: center;
+  margin-top: 90px;
+}
+
+#pixel-board .pixel {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border: 1px solid black;
+  vertical-align: middle;
   cursor: pointer;
 }
