@@ -29,7 +29,10 @@ function createColorPalette() {
     color.className = 'color';
     colorPalette.appendChild(color);
 
-    if (index === 0) color.classList.add('selected');
+    if (index === 0) {
+      color.classList.add('selected');
+      color.style.backgroundColor = 'black';
+    }
   }
   const button = document.createElement('button');
   button.innerText = 'Cores aleatórias';
@@ -92,6 +95,18 @@ function selectColor(event) {
 }
 
 colorPalette.addEventListener('click', selectColor);
+
+function paintPixel(event) {
+  const clicked = event.target;
+  const colorSelected = document.querySelector('.selected');
+
+  if (clicked !== pixelBoard) {
+    console.log(clicked);
+    clicked.style.backgroundColor = colorSelected.style.backgroundColor;
+  }
+}
+
+pixelBoard.addEventListener('click', paintPixel);
 
 initialRenderization();
 generatePixelBoard();
