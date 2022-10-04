@@ -8,3 +8,21 @@
   text-align: center;
   margin: 40px 0;
 }
+
+#color-palette {
+  text-align: center;
+  margin-top: 70px;
+}
+
+#color-palette .color {
+  width: 56px;
+  height: 56px;
+  display: inline-block;
+  margin: 0 20px;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+#color-palette .color:nth-of-type( 1 ) {
+  background-color: black;
+}
