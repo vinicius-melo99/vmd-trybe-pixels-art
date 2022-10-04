@@ -64,6 +64,8 @@ function generateRandomColors() {
   addColorsToLocalStorage();
 }
 
+randomButton.addEventListener('click', generateRandomColors);
+
 function generatePixelBoard() {
   for (let index = 0; index < 5; index += 1) {
     for (let index2 = 0; index2 < 5; index2 += 1) {
@@ -77,7 +79,19 @@ function generatePixelBoard() {
   }
 }
 
-randomButton.addEventListener('click', generateRandomColors);
+function selectColor(event) {
+  const clicked = event.target;
+  const colors = colorPalette.children;
+
+  if (clicked !== colorPalette && clicked !== randomButton) {
+    for (let index = 0; index < colors.length - 1; index += 1) {
+      colors[index].classList.remove('selected');
+    }
+    clicked.classList.add('selected');
+  }
+}
+
+colorPalette.addEventListener('click', selectColor);
 
 initialRenderization();
 generatePixelBoard();
