@@ -39,7 +39,7 @@
 
 #pixel-board {
   text-align: center;
-  margin-top: 90px;
+  padding-top: 30px;
 }
 
 #pixel-board .pixel {
@@ -49,4 +49,20 @@
   border: 1px solid black;
   vertical-align: middle;
   cursor: pointer;
+}
+
+#button-container {
+  text-align: center;
+  margin-top: 40px;
+}
+
+#clear-board {
+  padding: 10px;
+  border-radius: 10px;
+  width: 100px;
+  height: 30px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  line-height: 10px;
 }

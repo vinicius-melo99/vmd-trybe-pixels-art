@@ -1,5 +1,6 @@
-const colorPalette = document.querySelector('#color-palette');
+const colorPalette = document.getElementById('color-palette');
 const pixelBoard = document.getElementById('pixel-board');
+const clearBoardButton = document.getElementById('clear-board');
 
 function setPrimaryColors() {
   const colors = colorPalette.children;
@@ -12,8 +13,8 @@ function setPrimaryColors() {
 
 function initialRenderization() {
   if (localStorage.getItem('colorPalette') === null) {
-    setPrimaryColors();
     localStorage.setItem('colorPalette', JSON.stringify(['red', 'green', 'blue']));
+    setPrimaryColors();
   } else {
     const colors = colorPalette.children;
     const colorList = JSON.parse(localStorage.getItem('colorPalette'));
@@ -107,6 +108,16 @@ function paintPixel(event) {
 }
 
 pixelBoard.addEventListener('click', paintPixel);
+
+function clearBoard() {
+  const pixels = pixelBoard.children;
+
+  for (let index = 0; index < pixels.length; index += 1) {
+    pixels[index].style.backgroundColor = 'white';
+  }
+}
+
+clearBoardButton.addEventListener('click', clearBoard);
 
 initialRenderization();
 generatePixelBoard();
