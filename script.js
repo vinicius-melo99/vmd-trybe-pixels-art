@@ -101,7 +101,6 @@ function removeOldBoard(x, y) {
 
 function generatePixelBoard(x, y) {
   let id = 0;
-
   for (let index = 0; index < y; index += 1) {
     for (let index2 = 0; index2 < x; index2 += 1) {
       const pixel = document.createElement('div');
