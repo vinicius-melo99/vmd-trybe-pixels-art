@@ -83,7 +83,6 @@ function insertNewBoard() {
     alert('Board Inválido!');
   }
 }
-
 buttonGenerateBoard.addEventListener('click', insertNewBoard);
 
 function removeOldBoard(x, y) {
