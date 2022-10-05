@@ -47,7 +47,6 @@ function addColorsToLocalStorage() {
 
 function generateRandomColors() {
   const colors = colorPalette.children;
-
   for (let index = 1; index < colors.length - 1; index += 1) {
     const r = Math.floor(Math.random() * 255) + 1;
     const g = Math.floor(Math.random() * 255) + 1;
