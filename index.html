@@ -10,13 +10,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Peralta&display=swap" rel="stylesheet">
     <title>Pixels Art</title>
 </head>
-<body>
+<body id="body">
     <h1 id="title">Paleta de Cores</h1>
     <section id="color-palette">
     </section>
+
+   
+    
+    <section id="input-container">
+        <div><label for="insertValue">Insira o tamanho do Board (5-50) </label></div>
+        <input type="number" name="insertValue" id="board-size" min="1">
+        <button id="generate-board">VQV</button>
+    </section>
+
     <section id="button-container">
         <button type="button" id="clear-board">Limpar</button>
     </section>
+
     <section id="pixel-board">
 
     </section>

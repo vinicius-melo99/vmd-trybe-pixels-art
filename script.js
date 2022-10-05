@@ -1,6 +1,9 @@
+const body = document.querySelector('#body');
 const colorPalette = document.getElementById('color-palette');
-const pixelBoard = document.getElementById('pixel-board');
+let pixelBoard = document.getElementById('pixel-board');
 const clearBoardButton = document.getElementById('clear-board');
+const insertValue = document.getElementById('board-size');
+const buttonGenerateBoard = document.getElementById('generate-board');
 
 function setPrimaryColors() {
   const colors = colorPalette.children;
@@ -57,11 +60,52 @@ function generateRandomColors() {
 
 randomButton.addEventListener('click', generateRandomColors);
 
-function generatePixelBoard() {
+function insertNewBoard() {
+  let valueXY = 0;
+
+  if (insertValue.value > 0) {
+    if (insertValue.value < 5) {
+      insertValue.value = 5;
+      valueXY = insertValue.value;
+      localStorage.setItem('boardSize', JSON.stringify(valueXY));
+      removeOldBoard(valueXY, valueXY);
+    } else if (insertValue.value > 50) {
+      insertValue.value = 50;
+      valueXY = insertValue.value;
+      localStorage.setItem('boardSize', JSON.stringify(valueXY));
+      removeOldBoard(valueXY, valueXY);
+    } else {
+      valueXY = insertValue.value;
+      localStorage.setItem('boardSize', JSON.stringify(valueXY));
+      removeOldBoard(valueXY, valueXY);
+    }
+  } else {
+    alert('Board Inválido!');
+  }
+}
+
+buttonGenerateBoard.addEventListener('click', insertNewBoard);
+
+function removeOldBoard(x, y) {
+  localStorage.removeItem('pixelBoard');
+  localStorage.setItem('pixelBoard', JSON.stringify([]));
+  pixelBoard.removeEventListener('click', paintPixel);
+  pixelBoard.remove();
+
+  const newPixelBoard = document.createElement('section');
+  newPixelBoard.id = 'pixel-board';
+  body.appendChild(newPixelBoard);
+  pixelBoard = document.getElementById('pixel-board');
+
+  generatePixelBoard(x, y);
+  pixelBoard.addEventListener('click', paintPixel);
+}
+
+function generatePixelBoard(x, y) {
   let id = 0;
 
-  for (let index = 0; index < 5; index += 1) {
-    for (let index2 = 0; index2 < 5; index2 += 1) {
+  for (let index = 0; index < y; index += 1) {
+    for (let index2 = 0; index2 < x; index2 += 1) {
       const pixel = document.createElement('div');
       pixel.id = id;
       pixel.className = 'pixel';
@@ -74,6 +118,8 @@ function generatePixelBoard() {
   }
   return document.getElementsByClassName('pixel');
 }
+
+let pixels = null;
 
 function selectColor(event) {
   const clicked = event.target;
@@ -88,8 +134,6 @@ function selectColor(event) {
 }
 
 colorPalette.addEventListener('click', selectColor);
-
-const pixels = generatePixelBoard();
 
 function addPixelsToLocalStorage() {
   if (localStorage.getItem('pixelBoard') === null) {
@@ -138,8 +182,11 @@ function initialRenderization() {
   if (localStorage.getItem('colorPalette') === null) {
     localStorage.setItem('colorPalette', JSON.stringify(['red', 'green', 'blue']));
     localStorage.setItem('pixelBoard', JSON.stringify([]));
+    localStorage.setItem('boardSize', JSON.stringify(5));
     setPrimaryColors();
+    pixels = generatePixelBoard(JSON.parse(localStorage.getItem('boardSize')), JSON.parse(localStorage.getItem('boardSize')));
   } else {
+    pixels = generatePixelBoard(JSON.parse(localStorage.getItem('boardSize')), JSON.parse(localStorage.getItem('boardSize')));
     const colors = colorPalette.children;
     const colorList = JSON.parse(localStorage.getItem('colorPalette'));
     for (let index = 1; index < colors.length - 1; index += 1) {
